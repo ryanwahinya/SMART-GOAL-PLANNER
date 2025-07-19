@@ -1,4 +1,13 @@
 {
-  "goals": [],
+  "goals": [
+    {
+      "id": "47de",
+      "name": "jjjjj",
+      "targetAmount": 44542,
+      "category": "gvgv",
+      "deadline": "2026-12-02",
+      "saved": 20
+    }
+  ],
   "deposits": []
 }

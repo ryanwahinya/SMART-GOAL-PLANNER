@@ -1,22 +1,26 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
-function DepositForm({ onDepositRefresh }) {
+function DepositForm({ onDeposit }) {
   const [goals, setGoals] = useState([]);
   const [goalId, setGoalId] = useState("");
   const [amount, setAmount] = useState("");
 
+  // Fetch all goals from the JSON Server
   useEffect(() => {
     fetch("http://localhost:3001/goals")
       .then((res) => res.json())
       .then((data) => setGoals(data))
-      .catch((err) => console.error("Failed to fetch goals", err));
+      .catch((err) => console.error("Failed to fetch goals:", err));
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const depositAmount = parseFloat(amount);
-    if (!goalId || depositAmount <= 0) return;
+    if (!goalId || depositAmount <= 0 || isNaN(depositAmount)) {
+      alert("Please select a goal and enter a valid amount.");
+      return;
+    }
 
     const selectedGoal = goals.find((g) => g.id === parseInt(goalId));
     if (!selectedGoal) return;
@@ -27,25 +31,24 @@ function DepositForm({ onDepositRefresh }) {
     };
 
     try {
-      const res = await fetch(
-        `http://localhost:3001/goals/${selectedGoal.id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedGoal),
-        }
-      );
+      const res = await fetch(`http://localhost:3001/goals/${goalId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedGoal),
+      });
 
-      if (res.ok) {
-        setAmount("");
-        setGoalId("");
-        alert("💰 Deposit successful!");
-        onDepositRefresh(); // 🔁 Refetch latest data
-      }
+      if (!res.ok) throw new Error("Failed to deposit");
+
+      const result = await res.json();
+      onDeposit(result);
+
+      setAmount("");
+      setGoalId("");
     } catch (err) {
-      console.error("Deposit failed:", err);
+      console.error("Deposit error:", err);
+      alert("Deposit failed.");
     }
   };
 
@@ -67,10 +70,11 @@ function DepositForm({ onDepositRefresh }) {
         ))}
       </select>
 
-      <label>Amount:</label>
+      <label>Amount to Deposit:</label>
       <input
         type="number"
         min="1"
+        step="0.01"
         value={amount}
         onChange={(e) => setAmount(e.target.value)}
         required

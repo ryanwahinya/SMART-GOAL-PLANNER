@@ -9,6 +9,11 @@ function AddGoalForm({ onGoalAdded }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!name || !targetAmount || !category || !deadline) {
+      alert("Please fill out all fields.");
+      return;
+    }
+
     const newGoal = {
       name,
       targetAmount: parseFloat(targetAmount),
@@ -20,23 +25,25 @@ function AddGoalForm({ onGoalAdded }) {
     try {
       const response = await fetch("http://localhost:3001/goals", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(newGoal),
       });
 
-      if (response.ok) {
-        const savedGoal = await response.json();
-        onGoalAdded(savedGoal);
-        
-        setName("");
-        setTargetAmount("");
-        setCategory("");
-        setDeadline("");
-      } else {
-        console.error("Failed to save goal.");
+      if (!response.ok) {
+        throw new Error("Failed to save goal.");
       }
+
+      const savedGoal = await response.json();
+      onGoalAdded(savedGoal); // update the dashboard's state
+      setName("");
+      setTargetAmount("");
+      setCategory("");
+      setDeadline("");
     } catch (error) {
       console.error("Error saving goal:", error);
+      alert("Something went wrong while saving the goal.");
     }
   };
 
@@ -45,7 +52,11 @@ function AddGoalForm({ onGoalAdded }) {
       <h2>Add New Goal</h2>
 
       <label>Goal Name:</label>
-      <input value={name} onChange={(e) => setName(e.target.value)} required />
+      <input
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        required
+      />
 
       <label>Target Amount:</label>
       <input

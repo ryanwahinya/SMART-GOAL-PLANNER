@@ -1,177 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap');
+
 body {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start; /* Change to 'center' for vertical centering */
-  min-height: 100vh;
-  background: linear-gradient(135deg, #0a0a0a, #1a001a);
-  color: #ffbdfd;
   font-family: 'Orbitron', sans-serif;
   margin: 0;
-}
-
-.container {
+  background: linear-gradient(135deg, #0a0a0a, #1a001a, #330033, #000033);
+  color: #ffbdfd;
+  min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 800px;
-  padding: 2rem;
-}
-
-h1, h2, h3 {
-  color: #ff67d4;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  margin-bottom: 1rem;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 1rem;
 }
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
+  max-width: 800px;
+  width: 100%;
+  padding: 1.5rem;
+  background: linear-gradient(145deg, rgba(255, 0, 204, 0.05), rgba(0, 0, 0, 0.1));
+  border: 1px solid #ff00cc55;
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 30px #ff00cc33;
 }
 
+/* Headings */
+h1, h2 {
+  text-align: center;
+  color: #ff66cc;
+  background: linear-gradient(to right, #ff66cc, #cc00ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Shared card styles */
 .goal-form,
 .deposit-form,
 .chart-container {
-  background: rgba(255, 0, 128, 0.05);
-  border: 1px solid rgba(255, 105, 180, 0.25);
-  backdrop-filter: blur(16px);
-  border-radius: 16px;
-  padding: 2rem;
+  background: linear-gradient(135deg, #1a001f, #2a0033);
+  border: 1px solid #ff4da6;
+  border-radius: 12px;
+  padding: 1.5rem;
   margin-bottom: 2rem;
-  box-shadow: 0 0 20px rgba(255, 20, 147, 0.25);
+  box-shadow: 0 0 12px #ff00cc55;
+  width: 100%;
 }
 
 label {
+  display: block;
+  margin-top: 1rem;
   font-weight: 600;
-  color: #ff7ecb;
-  text-transform: uppercase;
-  font-size: 0.9rem;
+  color: #ffccee;
 }
 
-input,
-select {
+input, select {
   width: 100%;
-  padding: 0.7rem;
-  margin-top: 0.5rem;
+  padding: 0.6rem;
+  margin-top: 0.25rem;
+  border: 1px solid #ff66cc;
   border-radius: 8px;
-  border: none;
-  background: rgba(255, 105, 180, 0.05);
-  color: #ffbdfd;
-  font-family: 'Orbitron', sans-serif;
+  background: linear-gradient(to right, #2a002f, #330033);
+  color: #fff;
   outline: none;
+  transition: border 0.3s ease;
 }
 
-input::placeholder {
-  color: #ffbdfd;
-  opacity: 0.6;
+input:focus, select:focus {
+  border-color: #ff99ff;
+  box-shadow: 0 0 5px #ff99ff88;
 }
 
 button {
-  margin-top: 1.2rem;
-  padding: 0.75rem 1.5rem;
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  background: linear-gradient(to right, #ff00cc, #ff66cc, #cc00ff);
+  color: white;
   border: none;
   border-radius: 10px;
-  font-weight: 700;
   cursor: pointer;
-  font-family: 'Orbitron', sans-serif;
-  text-transform: uppercase;
-  color: #fff;
-  background: linear-gradient(to right, #ff00cc, #333399);
-  box-shadow: 0 0 14px #ff00cc;
-  transition: all 0.3s ease;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
+  background: linear-gradient(to right, #ff33aa, #ff99cc, #9900ff);
   transform: scale(1.05);
-  box-shadow: 0 0 25px #ff00cc;
 }
 
+/* Goal card */
 .goal-card {
-  background: rgba(255, 0, 128, 0.08);
-  border-left: 4px solid #ff00aa;
-  border-radius: 14px;
-  padding: 1.8rem;
-  margin-bottom: 2rem;
-  color: #ffdafb;
-  box-shadow: 0 0 15px rgba(255, 0, 128, 0.3);
+  background: linear-gradient(to bottom right, #1a001f, #33003f);
+  border: 1px solid #ff33aa;
+  border-left: 5px solid #ff66cc;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 0 10px #ff00cc33;
+}
+
+.goal-card h3 {
+  margin-top: 0;
+  color: #ffc0ff;
 }
 
 .progress-container {
-  background: rgba(255, 255, 255, 0.08);
-  height: 18px;
+  background-color: #3a003f;
+  height: 16px;
   border-radius: 10px;
   overflow: hidden;
-  margin-top: 12px;
-  box-shadow: inset 0 0 8px #ff69b4;
+  margin-top: 10px;
 }
 
 .progress-bar {
   height: 100%;
-  background: linear-gradient(to right, #ff00cc, #cc00ff);
-  transition: width 0.4s ease-in-out;
-  box-shadow: 0 0 10px #ff00cc;
+  background: linear-gradient(to right, #ff33aa, #cc00ff, #6600ff);
+  transition: width 0.3s ease-in-out;
 }
 
-.goal-actions {
+/* Chart */
+.chart-wrapper {
+  position: relative;
+  height: 300px;
+  background: linear-gradient(135deg, #140014, #240033);
+  border-radius: 12px;
+  box-shadow: 0 0 15px #ff00cc33;
+}
+
+/* Share link */
+.share-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: #ff66cc;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.share-link:hover {
+  text-decoration: underline;
+}
+
+/* Buttons for edit/delete */
+.goal-card__actions {
   display: flex;
   justify-content: flex-end;
-  gap: 0.6rem;
+  gap: 0.5rem;
   margin-top: 1rem;
 }
 
 .edit-btn,
 .delete-btn {
-  padding: 0.6rem 1rem;
-  font-size: 0.85rem;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-family: 'Orbitron', sans-serif;
-  text-transform: uppercase;
-  transition: all 0.3s ease;
-  letter-spacing: 1px;
+  transition: transform 0.2s ease;
 }
 
 .edit-btn {
-  background: linear-gradient(45deg, #ff85e4, #cc66ff);
-  color: #fff;
-  box-shadow: 0 0 10px #d633ff;
+  background: linear-gradient(to right, #aa33ff, #6600ff);
+  color: white;
 }
 
 .delete-btn {
-  background: linear-gradient(45deg, #ff0066, #990033);
-  color: #fff;
-  box-shadow: 0 0 10px #ff1a75;
+  background: linear-gradient(to right, #ff3366, #ff0033);
+  color: white;
 }
 
 .edit-btn:hover,
 .delete-btn:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 18px #ff6ffb;
 }
 
-.suggestion-output {
-  background-color: rgba(255, 0, 128, 0.1);
-  padding: 1rem;
-  border-left: 4px solid #ff66cc;
-  border-radius: 6px;
-  color: #ffc6f7;
-  font-size: 0.95rem;
-  margin-top: 1rem;
-}
+/* Responsive styles */
+@media (max-width: 600px) {
+  .container {
+    padding: 1rem;
+  }
 
-.share-link {
-  display: inline-block;
-  margin-top: 0.5rem;
-  color: #ff66e0;
-  text-decoration: none;
-  font-weight: 600;
-}
+  .goal-form,
+  .deposit-form,
+  .chart-container {
+    padding: 1rem;
+  }
 
-.share-link:hover {
-  text-decoration: underline;
-  color: #fff;
+  .goal-card__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  button,
+  .edit-btn,
+  .delete-btn {
+    width: 100%;
+  }
 }
- 

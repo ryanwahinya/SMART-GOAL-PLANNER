@@ -22,12 +22,8 @@ function Dashboard() {
     setGoals((prev) => [...prev, newGoal]);
   };
 
-  const handleDeposit = (updatedGoal) => {
-    setGoals((prevGoals) =>
-      prevGoals.map((goal) =>
-        goal.id === updatedGoal.id ? updatedGoal : goal
-      )
-    );
+  const handleDeposit = () => {
+    fetchGoals(); // <-- Refetch full list after deposit
   };
 
   const handleDeleteGoal = async (id) => {
@@ -51,7 +47,8 @@ function Dashboard() {
       <h1>Smart Goal Planner</h1>
 
       <AddGoalForm onGoalAdded={handleGoalAdded} />
-      <DepositForm onDeposit={handleDeposit} />
+      <DepositForm onDepositRefresh={fetchGoals} />
+
       <CategoryPieChart goals={goals} />
 
       <h2>Your Goals</h2>
