@@ -15,15 +15,15 @@ function AddGoalForm({ onGoalAdded }) {
     }
 
     const newGoal = {
-      name,
+      name: name.trim(),
       targetAmount: parseFloat(targetAmount),
-      category,
+      category: category.trim(),
       deadline,
       saved: 0,
     };
 
     try {
-      const response = await fetch("http://localhost:3001/goals", {
+      const res = await fetch("http://localhost:3002/goals", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -31,19 +31,24 @@ function AddGoalForm({ onGoalAdded }) {
         body: JSON.stringify(newGoal),
       });
 
-      if (!response.ok) {
+      if (!res.ok) {
+        console.error("Failed POST response:", res.status);
         throw new Error("Failed to save goal.");
       }
 
-      const savedGoal = await response.json();
-      onGoalAdded(savedGoal); // update the dashboard's state
+      const savedGoal = await res.json();
+
+      if (onGoalAdded) {
+        onGoalAdded(savedGoal);
+      }
+
       setName("");
       setTargetAmount("");
       setCategory("");
       setDeadline("");
     } catch (error) {
       console.error("Error saving goal:", error);
-      alert("Something went wrong while saving the goal.");
+      alert("Could not save goal. Check if the backend is running.");
     }
   };
 
@@ -51,30 +56,44 @@ function AddGoalForm({ onGoalAdded }) {
     <form onSubmit={handleSubmit} className="goal-form">
       <h2>Add New Goal</h2>
 
-      <label>Goal Name:</label>
+      <label htmlFor="goal-name">Goal Name:</label>
       <input
+        id="goal-name"
+        type="text"
         value={name}
         onChange={(e) => setName(e.target.value)}
+        placeholder="E.g., Buy a Laptop"
         required
       />
 
-      <label>Target Amount:</label>
+      <label htmlFor="target-amount">Target Amount:</label>
       <input
+        id="target-amount"
         type="number"
         value={targetAmount}
         onChange={(e) => setTargetAmount(e.target.value)}
+        placeholder="E.g., 50000"
         required
       />
 
-      <label>Category:</label>
-      <input
+      <label htmlFor="category">Category:</label>
+      <select
+        id="category"
         value={category}
         onChange={(e) => setCategory(e.target.value)}
         required
-      />
+      >
+        <option value="" disabled>Select a category</option>
+        <option value="Education">Education</option>
+        <option value="Travel">Travel</option>
+        <option value="Investment">Investment</option>
+        <option value="Personal">Personal</option>
+        <option value="Emergency">Emergency</option>
+      </select>
 
-      <label>Deadline:</label>
+      <label htmlFor="deadline">Deadline:</label>
       <input
+        id="deadline"
         type="date"
         value={deadline}
         onChange={(e) => setDeadline(e.target.value)}

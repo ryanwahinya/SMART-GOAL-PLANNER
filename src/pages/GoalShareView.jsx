@@ -6,7 +6,7 @@ function GoalShareView() {
   const [goal, setGoal] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/goals/${id}`)
+    fetch(`http://localhost:3002/goals/${id}`)
       .then((res) => res.json())
       .then((data) => setGoal(data))
       .catch((err) => console.error("Failed to fetch goal", err));

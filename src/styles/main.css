@@ -28,6 +28,7 @@ h1, h2 {
   text-align: center;
   color: #ff66cc;
   background: linear-gradient(to right, #ff66cc, #cc00ff);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -193,3 +194,26 @@ button:hover {
     width: 100%;
   }
 }
+
+
+select {
+  appearance: none;
+  background: linear-gradient(to right, #2a002f, #330033);
+  color: #ffccee;
+  border: 1px solid #ff66cc;
+  padding: 0.6rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23ff66cc' d='M6 8L0 0h12L6 8z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 12px 8px;
+}
+
+select:focus {
+  border-color: #ff99ff;
+  box-shadow: 0 0 5px #ff99ff88;
+  outline: none;
+}
+

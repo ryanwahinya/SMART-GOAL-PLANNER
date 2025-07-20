@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 
-// Register chart components
+
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function CategoryPieChart() {
   const [goals, setGoals] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3001/goals")
+    fetch("http://localhost:3002/goals")
       .then((res) => res.json())
       .then((data) => setGoals(data));
   }, []);

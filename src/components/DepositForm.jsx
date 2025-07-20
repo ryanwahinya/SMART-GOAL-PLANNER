@@ -5,9 +5,9 @@ function DepositForm({ onDeposit }) {
   const [goalId, setGoalId] = useState("");
   const [amount, setAmount] = useState("");
 
-  // Fetch all goals from the JSON Server
+  
   useEffect(() => {
-    fetch("http://localhost:3001/goals")
+    fetch("http://localhost:3002/goals")
       .then((res) => res.json())
       .then((data) => setGoals(data))
       .catch((err) => console.error("Failed to fetch goals:", err));
@@ -31,7 +31,7 @@ function DepositForm({ onDeposit }) {
     };
 
     try {
-      const res = await fetch(`http://localhost:3001/goals/${goalId}`, {
+      const res = await fetch(`http://localhost:3002/goals/1`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

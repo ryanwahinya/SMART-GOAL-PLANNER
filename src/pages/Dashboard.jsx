@@ -3,12 +3,13 @@ import AddGoalForm from "../components/AddGoalForm";
 import GoalCard from "../components/GoalCard";
 import DepositForm from "../components/DepositForm";
 import CategoryPieChart from "../components/CategoryPieChart";
+import OverviewDisplay from "../components/OverviewDisplay";
 
 function Dashboard() {
   const [goals, setGoals] = useState([]);
 
   const fetchGoals = () => {
-    fetch("http://localhost:3001/goals")
+    fetch("http://localhost:3002/goals")
       .then((res) => res.json())
       .then((data) => setGoals(data))
       .catch((err) => console.error("Failed to fetch goals", err));
@@ -18,17 +19,21 @@ function Dashboard() {
     fetchGoals();
   }, []);
 
-  const handleGoalAdded = (newGoal) => {
-    setGoals((prev) => [...prev, newGoal]);
+  const handleGoalAdd = (newGoal) => {
+    setGoals((prevGoals) => [...prevGoals, newGoal]);
   };
 
   const handleDeposit = () => {
-    fetchGoals(); // <-- Refetch full list after deposit
+    fetchGoals();
+  };
+
+  const handleEditGoal = (goal) => {
+  console.log("Edit goal clicked:", goal);
   };
 
   const handleDeleteGoal = async (id) => {
     try {
-      const res = await fetch(`http://localhost:3001/goals/${id}`, {
+      const res = await fetch(`http://localhost:3002/goals/${id}`, {
         method: "DELETE",
       });
 
@@ -46,10 +51,16 @@ function Dashboard() {
     <div className="container">
       <h1>Smart Goal Planner</h1>
 
-      <AddGoalForm onGoalAdded={handleGoalAdded} />
-      <DepositForm onDepositRefresh={fetchGoals} />
+      
+      <AddGoalForm onGoalAdded={handleGoalAdd} />
+
+      <DepositForm onDeposit={handleDeposit} />
 
       <CategoryPieChart goals={goals} />
+
+      <OverviewDisplay goals={goals} />
+
+      
 
       <h2>Your Goals</h2>
       {goals.length === 0 ? (
@@ -60,6 +71,7 @@ function Dashboard() {
             key={goal.id}
             goal={goal}
             onDelete={handleDeleteGoal}
+            onEdit={handleEditGoal}
           />
         ))
       )}
