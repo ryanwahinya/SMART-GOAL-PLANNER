@@ -3,7 +3,7 @@
     {
       "id": "1",
       "name": "Diani",
-      "targetAmount": 454545,
+      "targetAmount": "30000",
       "category": "Education",
       "deadline": "2026-12-02",
       "saved": 600,

@@ -110,10 +110,11 @@ npm start     # if using CRA
 
 
 
-👨‍💻 Author
+# Author
 Ryan Wahinya
 React Developer | Fintech UI Builder
 [https://github.com/ryanwahinya]
 
-📃 License
+
+# License
 This project is licensed under the MIT License.

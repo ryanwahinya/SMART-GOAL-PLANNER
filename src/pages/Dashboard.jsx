@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import EditGoalForm from "../components/EditGoalForm";
 import AddGoalForm from "../components/AddGoalForm";
 import GoalCard from "../components/GoalCard";
 import DepositForm from "../components/DepositForm";
@@ -7,6 +8,7 @@ import OverviewDisplay from "../components/OverviewDisplay";
 
 function Dashboard() {
   const [goals, setGoals] = useState([]);
+  const [editingGoal, setEditingGoal] = useState(null); 
 
   const fetchGoals = () => {
     fetch("http://localhost:3002/goals")
@@ -28,7 +30,29 @@ function Dashboard() {
   };
 
   const handleEditGoal = (goal) => {
-  console.log("Edit goal clicked:", goal);
+    setEditingGoal(goal);
+  };
+
+  const handleUpdateGoal = async (updatedGoal) => {
+    try {
+      const res = await fetch(`http://localhost:3002/goals/${updatedGoal.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedGoal),
+      });
+
+      if (res.ok) {
+        const updated = await res.json();
+        setGoals((prevGoals) =>
+          prevGoals.map((g) => (g.id === updated.id ? updated : g))
+        );
+        setEditingGoal(null); // Exit edit mode
+      } else {
+        console.error("Failed to update goal");
+      }
+    } catch (err) {
+      console.error("Error updating goal:", err);
+    }
   };
 
   const handleDeleteGoal = async (id) => {
@@ -51,16 +75,21 @@ function Dashboard() {
     <div className="container">
       <h1>Smart Goal Planner</h1>
 
-      
-      <AddGoalForm onGoalAdded={handleGoalAdd} />
-
-      <DepositForm onDeposit={handleDeposit} />
+      {editingGoal ? (
+        <EditGoalForm
+          goal={editingGoal}
+          onSave={handleUpdateGoal}
+          onCancel={() => setEditingGoal(null)}
+        />
+      ) : (
+        <>
+          <AddGoalForm onGoalAdded={handleGoalAdd} />
+          <DepositForm onDeposit={handleDeposit} />
+        </>
+      )}
 
       <CategoryPieChart goals={goals} />
-
       <OverviewDisplay goals={goals} />
-
-      
 
       <h2>Your Goals</h2>
       {goals.length === 0 ? (

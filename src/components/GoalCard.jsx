@@ -86,8 +86,8 @@ function GoalCard({ goal, onDelete, onEdit }) {
       </form>
 
       <div className="goal-actions">
-        <button className="edit-btn" onClick={() => onEdit(goal)}>✏️ Edit</button>
-        <button className="delete-btn" onClick={handleDelete}>🗑️ Delete</button>
+        <button className="edit-btn" onClick={() => onEdit(goal)}>Edit</button>
+        <button className="delete-btn" onClick={handleDelete}>Delete</button>
       </div>
     </div>
   );
