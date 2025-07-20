@@ -115,6 +115,3 @@ Ryan Wahinya |
 React Developer | 
 [https://github.com/ryanwahinya]
 
-
-# License
-This project is licensed under the MIT License.
