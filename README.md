@@ -111,8 +111,8 @@ npm start     # if using CRA
 
 
 # Author
-Ryan Wahinya
-React Developer | Fintech UI Builder
+Ryan Wahinya |
+React Developer | 
 [https://github.com/ryanwahinya]
 
 
