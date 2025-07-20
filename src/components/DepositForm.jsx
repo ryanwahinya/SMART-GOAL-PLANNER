@@ -13,44 +13,45 @@ function DepositForm({ onDeposit }) {
       .catch((err) => console.error("Failed to fetch goals:", err));
   }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    const depositAmount = parseFloat(amount);
-    if (!goalId || depositAmount <= 0 || isNaN(depositAmount)) {
-      alert("Please select a goal and enter a valid amount.");
-      return;
-    }
+  const depositAmount = parseFloat(amount);
+  if (!goalId || depositAmount <= 0 || isNaN(depositAmount)) {
+    alert("Please select a goal and enter a valid amount.");
+    return;
+  }
 
-    const selectedGoal = goals.find((g) => g.id === parseInt(goalId));
-    if (!selectedGoal) return;
+  const selectedGoal = goals.find((g) => g.id === parseInt(goalId));
+  if (!selectedGoal) return;
 
-    const updatedGoal = {
-      ...selectedGoal,
-      saved: selectedGoal.saved + depositAmount,
-    };
-
-    try {
-      const res = await fetch(`http://localhost:3002/goals/1`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedGoal),
-      });
-
-      if (!res.ok) throw new Error("Failed to deposit");
-
-      const result = await res.json();
-      onDeposit(result);
-
-      setAmount("");
-      setGoalId("");
-    } catch (err) {
-      console.error("Deposit error:", err);
-      alert("Deposit failed.");
-    }
+  const updatedGoal = {
+    ...selectedGoal,
+    saved: selectedGoal.saved + depositAmount,
   };
+
+  try {
+    const res = await fetch(`http://localhost:3002/goals/${goalId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedGoal),
+    });
+
+    if (!res.ok) throw new Error("Failed to deposit");
+
+    const result = await res.json();
+    onDeposit(result); // triggers refetch in Dashboard
+
+    setAmount("");
+    setGoalId("");
+  } catch (err) {
+    console.error("Deposit error:", err);
+    alert("Deposit failed.");
+  }
+};
+
 
   return (
     <form onSubmit={handleSubmit} className="deposit-form">

@@ -6,13 +6,24 @@ function GoalShareView() {
   const [goal, setGoal] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:3002/goals/${id}`)
-      .then((res) => res.json())
-      .then((data) => setGoal(data))
-      .catch((err) => console.error("Failed to fetch goal", err));
-  }, [id]);
+  fetch(`http://localhost:3002/goals/${id}`)
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error("Goal not found");
+      }
+      return res.json();
+    })
+    .then((data) => setGoal(data))
+    .catch((err) => {
+      console.error("Failed to fetch goal", err);
+      setGoal(undefined);
+    });
+}, [id]);
 
-  if (!goal) return <p>Loading shared goal...</p>;
+
+  if (goal === null) return <p>Loading shared goal...</p>;
+  if (goal === undefined) return <p>Goal not found.</p>;
+
 
   const { name, targetAmount, saved, category, deadline } = goal;
   const progress = Math.min((saved / targetAmount) * 100, 100);

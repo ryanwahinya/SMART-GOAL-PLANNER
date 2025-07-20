@@ -20,6 +20,7 @@ function AddGoalForm({ onGoalAdded }) {
       category: category.trim(),
       deadline,
       saved: 0,
+      createdAt: new Date().toISOString()  // <-- ✅ add this line
     };
 
     try {

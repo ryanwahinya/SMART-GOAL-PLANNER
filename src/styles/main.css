@@ -23,7 +23,7 @@ body {
   box-shadow: 0 0 30px #ff00cc33;
 }
 
-/* Headings */
+
 h1, h2 {
   text-align: center;
   color: #ff66cc;
@@ -33,7 +33,7 @@ h1, h2 {
   -webkit-text-fill-color: transparent;
 }
 
-/* Shared card styles */
+
 .goal-form,
 .deposit-form,
 .chart-container {
@@ -86,7 +86,7 @@ button:hover {
   transform: scale(1.05);
 }
 
-/* Goal card */
+
 .goal-card {
   background: linear-gradient(to bottom right, #1a001f, #33003f);
   border: 1px solid #ff33aa;
@@ -116,7 +116,7 @@ button:hover {
   transition: width 0.3s ease-in-out;
 }
 
-/* Chart */
+
 .chart-wrapper {
   position: relative;
   height: 300px;
@@ -125,7 +125,7 @@ button:hover {
   box-shadow: 0 0 15px #ff00cc33;
 }
 
-/* Share link */
+
 .share-link {
   display: inline-block;
   margin-top: 0.5rem;
@@ -138,7 +138,7 @@ button:hover {
   text-decoration: underline;
 }
 
-/* Buttons for edit/delete */
+
 .goal-card__actions {
   display: flex;
   justify-content: flex-end;
@@ -171,7 +171,7 @@ button:hover {
   transform: scale(1.05);
 }
 
-/* Responsive styles */
+
 @media (max-width: 600px) {
   .container {
     padding: 1rem;

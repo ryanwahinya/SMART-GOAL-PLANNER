@@ -1,3 +1,13 @@
 {
-  "goals": []
+  "goals": [
+    {
+      "id": "1",
+      "name": "Diani",
+      "targetAmount": 454545,
+      "category": "Education",
+      "deadline": "2026-12-02",
+      "saved": 600,
+      "createdAt": "2025-07-20T13:45:25.738Z"
+    }
+  ]
 }

@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 function GoalCard({ goal, onDelete, onEdit }) {
-  const { id, name, targetAmount, saved, category, deadline } = goal;
+  const { id, name, targetAmount, saved, category, deadline, createdAt } = goal;
 
   const progress = Math.min((saved / targetAmount) * 100, 100);
   const remaining = Math.max(targetAmount - saved, 0);
@@ -59,6 +59,7 @@ function GoalCard({ goal, onDelete, onEdit }) {
         <p><strong>Saved:</strong> ${saved.toLocaleString()}</p>
         <p><strong>Remaining:</strong> ${remaining.toLocaleString()}</p>
         <p><strong>Deadline:</strong> {deadline} ({daysLeft} days left)</p>
+        <p><strong>Created At:</strong> {new Date(createdAt).toLocaleDateString()}</p>
       </div>
 
       <div className="progress-container">
