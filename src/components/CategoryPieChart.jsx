@@ -14,7 +14,6 @@ function CategoryPieChart() {
       .then((data) => setGoals(data));
   }, []);
 
-  // Group saved amounts by category
   const categoryTotals = goals.reduce((acc, goal) => {
     if (!acc[goal.category]) {
       acc[goal.category] = 0;

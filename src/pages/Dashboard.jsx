@@ -46,7 +46,7 @@ function Dashboard() {
         setGoals((prevGoals) =>
           prevGoals.map((g) => (g.id === updated.id ? updated : g))
         );
-        setEditingGoal(null); // Exit edit mode
+        setEditingGoal(null); 
       } else {
         console.error("Failed to update goal");
       }

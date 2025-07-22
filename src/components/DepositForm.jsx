@@ -42,7 +42,7 @@ function DepositForm({ onDeposit }) {
     if (!res.ok) throw new Error("Failed to deposit");
 
     const result = await res.json();
-    onDeposit(result); // triggers refetch in Dashboard
+    onDeposit(result); 
 
     setAmount("");
     setGoalId("");

@@ -1,13 +1,13 @@
 {
   "goals": [
     {
-      "id": "d676",
+      "id": "0ad7",
       "name": "Diani",
-      "targetAmount": 50000,
+      "targetAmount": 500000,
       "category": "Travel",
-      "deadline": "5555-05-05",
+      "deadline": "2026-02-17",
       "saved": 600,
-      "createdAt": "2025-07-20T14:38:51.824Z"
+      "createdAt": "2025-07-22T11:36:38.642Z"
     }
   ]
 }
